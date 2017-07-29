@@ -28,4 +28,4 @@ def press_c(channel):
     display_message("C")
     rainbowhat.lights.rgb(0,0,1)
 
-
+show_decision(False)
