@@ -29,3 +29,9 @@ def press_c(channel):
     rainbowhat.lights.rgb(0,0,1)
 
 show_decision(False)
+
+try:
+	while True:
+		pass
+except KeyboardInterrupt:
+	pass
