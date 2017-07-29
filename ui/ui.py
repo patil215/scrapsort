@@ -4,14 +4,18 @@ def display_message(message):
     rainbowhat.display.print_str(message)
     rainbowhat.display.show()
 
+def set_all_pixels(*args, **kwargs):
+	for pixel in range(7):
+		rainbowhat.rainbow.set_pixel(x, *args, **kwargs)
+	rainbowhat.rainbow.show()
+
 def show_decision(isTrash):
-	display_message("T" if isTrash else "R")
 	if isTrash:
+		set_all_pixels(1, 0, 0)
 		display_message("T")
-		rainbowhat.lights.rgb(1, 0, 0)
 	else:
+		set_all_pixels(0, 1, 0)
 		display_message("R")
-		rainbowhat.lights.rgb(0, 1, 0)
 
 @rainbowhat.touch.A.press()
 def press_a(channel):
@@ -28,10 +32,12 @@ def press_c(channel):
     display_message("C")
     rainbowhat.lights.rgb(0,0,1)
 
-show_decision(False)
 
-try:
-	while True:
+if __name__ == '__main__':
+	show_decision(False)
+
+	try:
+		while True:
+			pass
+	except KeyboardInterrupt:
 		pass
-except KeyboardInterrupt:
-	pass
