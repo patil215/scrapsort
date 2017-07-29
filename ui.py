@@ -6,7 +6,7 @@ def display_message(message):
 
 def set_all_pixels(*args, **kwargs):
 	for pixel in range(7):
-		rainbowhat.rainbow.set_pixel(x, *args, **kwargs)
+		rainbowhat.rainbow.set_pixel(pixel, *args, **kwargs)
 	rainbowhat.rainbow.show()
 
 def show_decision(isTrash):
