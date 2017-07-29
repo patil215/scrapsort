@@ -1,8 +1,7 @@
 import picamera
 
 """ Takes a photo and saves it to the /img directory. """
-def takephoto(filepath):
+def takePhoto(filepath):
 	camera = picamera.PiCamera()
-	camera.capture('img/' + filepath)
+	camera.capture(filepath)
 
-takephoto('image.jpg')

@@ -1,6 +1,14 @@
 import wiringpi
 import time
 
+initialized = False
+
+#def initialize():
+#global initialized
+
+#if initialized:
+#	return
+	
 wiringpi.wiringPiSetupGpio()
 
 wiringpi.pinMode(18, wiringpi.GPIO.PWM_OUTPUT)
@@ -11,14 +19,9 @@ wiringpi.pwmSetClock(192)
 wiringpi.pwmSetRange(2000)
 
 delay_period= 0.01
+initialized = True
 
-while True:
-	wiringpi.pwmWrite(18, 10)
+def move(position):
+#	initialize()
+	wiringpi.pwmWrite(18, position)
 	time.sleep(1)
-	wiringpi.pwmWrite(18, 170)
-	time.sleep(1)
-
-#def main():
-
-#if __name__ == '__main__':
-	#main()
