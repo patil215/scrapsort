@@ -1,0 +1,77 @@
+{% extends "common/page_base.html" %}
+
+{% block content %}
+
+<div id='header_container'>
+  <h1 id='main_title'>In<span id="tube">Tube</span><span id="tagline">Add a video to search its content</h4></h1>
+  <form id="addvideo" action="/add_video" method="POST" enctype="">
+    <div>
+      <input id="url-box" class="" type="text" name="url" placeholder="YouTube URL">
+      <input id="big-button" type="submit" value="Process">
+    </div>
+  </form>
+  <div id="progress" class="progress" style="display: none;"></div>
+</div>
+
+
+<script>
+
+function update_progress(status_url, nanobar, status_div) {
+    // send GET request to status URL
+    $.getJSON(status_url, function(data) {
+        // update UI
+        percent = parseInt(data['current'] * 100 / data['total']);
+        nanobar.go(percent);
+        $(status_div.childNodes[1]).text(percent + '%');
+        $(status_div.childNodes[2]).text(data['status']);
+        if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
+            if ('result' in data) {
+                // show result
+                $(status_div.childNodes[3]).text('Result: ' + data['result']);
+            }
+            else {
+                // something unexpected happened
+                $(status_div.childNodes[3]).text('Result: ' + data['state']);
+            }
+        }
+        else {
+            // rerun in 2 seconds
+            setTimeout(function() {
+                update_progress(status_url, nanobar, status_div);
+            }, 2000);
+        }
+    });
+}
+
+// add task status elements 
+div = $('<div class="progress"><div></div><div>0%</div><div>...</div><div>&nbsp;</div></div><hr>');
+$('#progress').append(div);
+
+// create a progress bar
+var nanobar = new Nanobar({
+    bg: '#44f',
+    target: div[0].childNodes[0]
+});
+
+
+var form = $("#addvideo");
+form.submit(function(e) {
+	e.preventDefault();
+
+  // show progress bar
+  $("#progress").show();
+
+	$.ajax({
+		type: form.attr("method"),
+		url: form.attr("action"),
+		data: form.serialize(),
+		success: function(data, status, request) {
+			status_url = request.getResponseHeader('Location');
+			update_progress(status_url, nanobar, div[0])
+		}
+	});
+});
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends "common/page_base.html" %} {# common/page_base.html extends layout.html #}
+
+{% block content %}
+
+<div id='header_container'>
+  <h1 id='main_title'>In<span id="tube">Tube</span><span id="tagline"> Search within YouTube videos with Machine Learning</h4></h1></span>
+  <br>
+  <input type="text" class="" id="search-box" /><div id="or">or</div>
+  <a href="/add" id='big-button'>
+    <input id="big-button" type="submit" value="Submit link">
+  </a>
+</div>
+<div id="hits-container"></div>
+<div id="pagination-container"></div>
+
+{% raw %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
+<div id="body_container">
+  <div id="results_container">
+  </div>
+</div>
+
+</script>
+
+  <script id="test" type="text/x-handlebars-template">
+		<div class="result_container">
+		<div class="preview_container">
+			<img class="preview" src="{{thumb}}" thumb="{{thumb}}"/>
+			<div class="hover_holder">
+			{{#each stamps}}
+			<div z-index="100" onclick="window.open('{{url}}&t={{this.sec}}','mywindow');"
+				style="cursor: pointer; margin-left: {{this.perc}}%;" class="hover"
+				value="{{this.image_url}}" onmouseover="showFrame(this)" url="{{url}}", onmouseout="hideFrame(this)">
+        <div class="hover_line"></div>
+			</div>
+			{{/each}}
+			
+			</div>
+		</div>
+			<div class="vid_deets">
+				<div class="vid_title"><a href='{{url}}'>{{title}}</a></div>
+				<div class="vid_desc">{{desc}}</div>
+				<div class="vid_username">{{username}}</div>
+      		</div>
+		</div>
+  </script>
+<script>
+function showFrame(e) {
+	var curr = $(e);
+	curr.parent().siblings('.preview').attr('src', curr.attr('value'));
+}
+function hideFrame(e) {
+	console.log('hideFrame');
+	var curr = $(e)
+	curr.parent().siblings('.preview').attr('src', curr.parent().siblings('.preview').attr('thumb'));
+}
+var source   = $("#test").html();
+var template = Handlebars.compile(source);
+
+var search = instantsearch({
+	appId: 'Y9MCTNJ20T',
+	apiKey: '5c85dabf76ed1ba90c86b74f3470d965',
+	indexName: 'frames',
+	searchFunction: function(helper) {
+    var searchResults = $('#results_container');
+    if (helper.state.query === '') {
+		  searchResults.hide();
+		  return;
+		}
+		helper.search();
+		helper.on('result', function(data){
+		    searchResults.hide();
+			$('#results_container').empty();
+			if (data.hits && data.hits.length > 0 && data.query.length > 2) {
+        searchResults.show();
+				var dict = {};
+				for (var i = 0; i < data.hits.length; i++) {
+					var curr = data.hits[i];
+					curr.sec = curr.time / 1000;
+					curr.perc = curr.sec / curr.vid_length * 100;
+					if (dict[curr.url]) {
+						dict[curr.url].stamps.push(curr);
+					}
+					else {
+						dict[curr.url] = {
+							stamps: [curr],
+							desc: curr.desc,
+							title: curr.title,
+							username: curr.username,
+							thumb: curr.thumb
+						}
+					}
+				}
+				var arr = Object.keys(dict).map(function(key) {
+   					 return dict[key]
+				})
+				arr.sort(function (a,b ) {
+					return b.stamps.length - a.stamps.length;
+				});
+				for (var i = 0; i < arr.length; i++) {
+					$('#results_container').append(template(arr[i]));
+				} 
+			}
+			
+		});
+	}
+});
+
+search.templatesConfig.helpers.format = function() {
+	var seconds = parseInt(this.time) / 1000;
+	var minutes = Math.floor(seconds / 60);
+	var rem = seconds % 60;
+	return minutes + "m:" + rem + "s";
+};
+
+search.templatesConfig.helpers.divide = function() {
+	return this.time / 1000;
+};
+
+search.addWidget(
+	instantsearch.widgets.searchBox({
+		container: '#search-box',
+		placeholder: 'Search for videos...'
+	})
+);
+
+search.start();
+
+</script>
+
+{% endraw %}
+
+{% endblock %}

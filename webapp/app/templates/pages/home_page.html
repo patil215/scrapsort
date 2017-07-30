@@ -1,0 +1,443 @@
+﻿{% extends "common/page_base.html" %} {# common/page_base.html extends layout.html #}
+
+{% block content %}
+
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button class="navbar-toggle waves-effect waves-dark" data-target=".sidebar-collapse" data-toggle="collapse" type="button">
+                <span class="sr-only">
+                    Toggle navigation
+                </span>
+                <span class="icon-bar">
+                </span>
+                <span class="icon-bar">
+                </span>
+                <span class="icon-bar">
+                </span>
+            </button>
+            <a class="navbar-brand waves-effect waves-dark" href="index.html">
+                <i class="large material-icons">
+                    insert_chart
+                </i>
+                <strong>
+                	MY TRASH
+                </strong>
+            </a>
+            <div href="" id="sideNav">
+                <i class="material-icons dp48">
+                    toc
+                </i>
+            </div>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <a class="dropdown-button waves-effect waves-dark" data-activates="dropdown1" href="#!">
+                    <i class="fa fa-user fa-fw">
+                    </i>
+                    <b>
+                        Neil Patil
+                    </b>
+                    <i class="material-icons right">
+                        arrow_drop_down
+                    </i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Dropdown Structure -->
+    <ul class="dropdown-content" id="dropdown1">
+        <li>
+            <a href="#">
+                <i class="fa fa-user fa-fw">
+                </i>
+                My Profile
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-gear fa-fw">
+                </i>
+                Settings
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-sign-out fa-fw">
+                </i>
+                Logout
+            </a>
+        </li>
+    </ul>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a class="active-menu waves-effect waves-dark" href="index.html">
+                        <i class="fa fa-dashboard">
+                        </i>
+                        Dashboard
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper">
+        <div class="header">
+            <h1 class="page-header">
+                Dashboard
+            </h1>
+        </div>
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="card horizontal cardIcon waves-effect waves-dark">
+                        <div class="card-image orange">
+                            <i class="fa fa-trash fa-5x">
+                            </i>
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <h3>
+                                	{{ data.numItems }}
+                                </h3>
+                            </div>
+                            <div class="card-action">
+                                <h4>
+	                                <strong>
+	                                	Items Thrown
+	                                </strong>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="card horizontal cardIcon waves-effect waves-dark">
+                        <div class="card-image green">
+                            <i class="fa fa-recycle fa-5x">
+                            </i>
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <h3>
+                                	{{ data.numRecycle }}
+                                </h3>
+                            </div>
+                            <div class="card-action">
+                                <h4>
+	                                <strong>
+	                                	Items Recycled
+	                                </strong>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="card horizontal cardIcon waves-effect waves-dark">
+                        <div class="card-image red">
+                            <i class="fa fa-fire fa-5x">
+                            </i>
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <h3>
+                                	{{ data.numTrash }}
+                                </h3>
+                            </div>
+                            <div class="card-action">
+                            	<h4>
+	                                <strong>
+	                                	Items Trashed
+	                                </strong>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="card-panel text-center">
+                        <h4>
+                        	Progress to Recycling Goal
+                        </h4>
+                        <div class="easypiechart" data-percent="82" id="easypiechart-blue">
+                            <span class="percent">
+                                82%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-image">
+                            <div id="morris-line-chart">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <b>
+                                Line Chart
+                            </b>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="card-image">
+                            <div id="morris-bar-chart">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <b>
+                                Bar Chart Example
+                            </b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="card-image">
+                            <div id="morris-area-chart">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <b>
+                                Area Chart
+                            </b>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="card-image">
+                            <div id="morris-donut-chart">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <b>
+                                Donut Chart Example
+                            </b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="card-action">
+                            <b>
+                                Tasks Panel
+                            </b>
+                        </div>
+                        <div class="card-image">
+                            <div class="collection">
+                                <a class="collection-item" href="#!">
+                                    Red
+                                    <span class="new badge red" data-badge-caption="red">
+                                        4
+                                    </span>
+                                </a>
+                                <a class="collection-item" href="#!">
+                                    Blue
+                                    <span class="new badge blue" data-badge-caption="blue">
+                                        4
+                                    </span>
+                                </a>
+                                <a class="collection-item" href="#!">
+                                    <span class="badge">
+                                        1
+                                    </span>
+                                    Alan
+                                </a>
+                                <a class="collection-item" href="#!">
+                                    <span class="new badge">
+                                        4
+                                    </span>
+                                    Alan
+                                </a>
+                                <a class="collection-item" href="#!">
+                                    Alan
+                                    <span class="new badge blue" data-badge-caption="blue">
+                                        4
+                                    </span>
+                                </a>
+                                <a class="collection-item" href="#!">
+                                    <span class="badge">
+                                        14
+                                    </span>
+                                    Alan
+                                </a>
+                                <a class="collection-item" href="#!">
+                                    Custom Badge Captions
+                                    <span class="new badge" data-badge-caption="custom caption">
+                                        4
+                                    </span>
+                                </a>
+                                <a class="collection-item" href="#!">
+                                    Custom Badge Captions
+                                    <span class="badge" data-badge-caption="custom caption">
+                                        4
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="card-action">
+                            <b>
+                                User List
+                            </b>
+                        </div>
+                        <div class="card-image">
+                            <ul class="collection">
+                                <li class="collection-item avatar">
+                                    <i class="material-icons circle green">
+                                        insert_chart
+                                    </i>
+                                    <span class="title">
+                                        Title
+                                    </span>
+                                    <p>
+                                        First Line
+                                        <br>
+                                            Second Line
+                                        </br>
+                                    </p>
+                                    <a class="secondary-content" href="#!">
+                                        <i class="material-icons">
+                                            grade
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class="collection-item avatar">
+                                    <i class="material-icons circle">
+                                        folder
+                                    </i>
+                                    <span class="title">
+                                        Title
+                                    </span>
+                                    <p>
+                                        First Line
+                                        <br>
+                                            Second Line
+                                        </br>
+                                    </p>
+                                    <a class="secondary-content" href="#!">
+                                        <i class="material-icons">
+                                            grade
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class="collection-item avatar">
+                                    <i class="material-icons circle green">
+                                        insert_chart
+                                    </i>
+                                    <span class="title">
+                                        Title
+                                    </span>
+                                    <p>
+                                        First Line
+                                        <br>
+                                            Second Line
+                                        </br>
+                                    </p>
+                                    <a class="secondary-content" href="#!">
+                                        <i class="material-icons">
+                                            grade
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class="collection-item avatar">
+                                    <i class="material-icons circle red">
+                                        play_arrow
+                                    </i>
+                                    <span class="title">
+                                        Title
+                                    </span>
+                                    <p>
+                                        First Line
+                                        <br>
+                                            Second Line
+                                        </br>
+                                    </p>
+                                    <a class="secondary-content" href="#!">
+                                        <i class="material-icons">
+                                            grade
+                                        </i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <div class="fixed-action-btn horizontal click-to-toggle">
+                <a class="btn-floating btn-large red">
+                    <i class="material-icons">
+                        menu
+                    </i>
+                </a>
+                <ul>
+                    <li>
+                        <a class="btn-floating red">
+                            <i class="material-icons">
+                                insert_chart
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn-floating yellow darken-1">
+                            <i class="material-icons">
+                                format_quote
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn-floating green">
+                            <i class="material-icons">
+                                publish
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn-floating blue">
+                            <i class="material-icons">
+                                attach_file
+                            </i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <footer>
+                <p>
+                    All right reserved. Template by:
+                    <a href="https://webthemez.com/admin-template/">
+                        WebThemez.com
+                    </a>
+                </p>
+            </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+
+{% endblock %}
