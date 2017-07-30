@@ -21,4 +21,6 @@ def get_image_labels(file_path):
             }]
         })
         response = service_request.execute()
-        return response['responses'][0]['labelAnnotations']
+
+        labels = response['responses'][0].get('labelAnnotations', [])
+        return labels
