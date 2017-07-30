@@ -8,13 +8,11 @@ INSERT_VIDEO
 
 ## The Classification Algorithm
 
-Initially, when prototyping the classifier we used the Google Cloud Vision API. This API returned a list of labels for a given image. By searching through the labels, we could pick out keywords that we thought would work. However, this classifier turned out to not be accurate enough.
+The classification algorithm is a modified convolutional neural network that we trained on our own custom data. Specifically, I used the Inception-v3 architecture, and retrained the final layer on our own training set. This meant that I could take advantage of the robustness of Inception-V3 while also providing extra labels for recyclable items. The classifier distinguishes between five categories of the most commonly recycled items: metal, paper, cardboard, glass, and plastic.
 
-We decided to try to train our own convolutional neural network to pick the right trash label.
+Initially, when prototyping the classifier we used the Google Cloud Vision API. This API returned a list of labels for a given image. By searching through the labels, we could pick out keywords that we thought would work. However, this classifier turned out to not be accurate enough. As a result, I trained my own classifier as mentioned above.
 
 Special thanks to this paper - http://cs229.stanford.edu/proj2016/report/ThungYang-ClassificationOfTrashForRecyclabilityStatus-report.pdf - for the dataset and the overall architecture help.
-
-Specially, I used the image retraining ability within Tensorflow to retrain the final layer of Inception-v3 on our own dataset. This consisted of images we took ourselves of the bottles and other items.
 
 ## Hardware
 
