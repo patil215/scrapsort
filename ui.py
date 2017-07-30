@@ -33,12 +33,12 @@ def set_all_pixels(*args, **kwargs):
 	rainbowhat.rainbow.show()
 
 
-def show_status(status):
-	if status == "ready":
-		set_all_pixels(0, 1, 0, brightness=1)
-	else:
-		set_all_pixels(1, 0, 0, brightness=1)
-	display_long_message(status)
+# def show_status(status):
+# 	if status == "ready":
+# 		set_all_pixels(0, 1, 0, brightness=1)
+# 	else:
+# 		set_all_pixels(1, 0, 0, brightness=1)
+# 	display_long_message(status)
 
 # def show_decision(is_trash):
 # 	if is_trash:
@@ -57,10 +57,9 @@ class StatusShower(threading.Thread):
 			s = status
 			status_lock.release()
 			
-			print("Status shower: status=%s" % s)
 			color = status_colors[s]
 			set_all_pixels(*color, brightness=1)
-			display_long_message(s)
+			display_long_message(s.upper())
 
 			time.sleep(1)
 
