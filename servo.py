@@ -3,12 +3,6 @@ import time
 
 initialized = False
 
-#def initialize():
-#global initialized
-
-#if initialized:
-#	return
-	
 wiringpi.wiringPiSetupGpio()
 
 wiringpi.pinMode(18, wiringpi.GPIO.PWM_OUTPUT)
