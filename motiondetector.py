@@ -8,7 +8,7 @@ from PIL import Image
 # Motion detection settings:
 # Threshold (how much a pixel has to change by to be marked as "changed")
 # Sensitivity (how many pixels need to have changed before we mark motion as having occurred)
-threshold = 10
+threshold = 12
 sensitivity = 500
 
 # Capture a small test image for motion detection
@@ -17,14 +17,12 @@ def captureTestImage(camera):
     camera.capture(stream, format='jpeg', resize=(100, 75))
     stream.seek(0)
     image = Image.open(stream)
-    buffer = im.load()
+    buffer = image.load()
     stream.close()
-    return im, buffer
+    return image, buffer
 
 """ Blocks until motion detection has occurred. Once motion passes the threshold, returns."""
-def waitForMotionDetection():
-    camera = PiCamera()
-
+def waitForMotionDetection(camera):
     # Get first image
     image1, buffer1 = captureTestImage(camera)
 
@@ -50,4 +48,4 @@ def waitForMotionDetection():
         buffer1 = buffer2
 
         # Wait for half a second before taking another picture
-        time.sleep(0.5)
+        time.sleep(0.25)

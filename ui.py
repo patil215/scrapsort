@@ -72,8 +72,6 @@ def set_status(s):
 	status = s
 	status_lock.release()
 
-
-
 @rainbowhat.touch.A.press()
 def press_a(channel):
     display_message("A")
