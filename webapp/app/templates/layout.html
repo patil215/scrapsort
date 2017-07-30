@@ -30,21 +30,18 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='js/Lightweight-Chart/cssCharts.css') }}"> 
     </head>
     <body>
-        {% block body %}
+
+    
+        <script src="{{ url_for('static', filename='js/jquery-1.10.2.js') }}"></script>
+        <!-- Morris Chart Js -->
+        <script src="{{ url_for('static', filename='js/morris/raphael-2.1.0.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/morris/morris.js') }}"></script>
         <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/nanobar/0.2.1/nanobar.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
         <script src="https://cdn.jsdelivr.net/hogan.js/3.0.2/hogan.min.common.js"></script>
-
-        <div id="main-div" class="with-margins">
-        {% block content %}{% endblock %}
-        </div>
-
-        <br/>
-
-        <script src="{{ url_for('static', filename='js/jquery-1.10.2.js') }}"></script>
-    
+        
         <!-- Bootstrap Js -->
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
         
@@ -52,9 +49,6 @@
         
         <!-- Metis Menu Js -->
         <script src="{{ url_for('static', filename='js/jquery.metisMenu.js') }}"></script>
-        <!-- Morris Chart Js -->
-        <script src="{{ url_for('static', filename='js/morris/raphael-2.1.0.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/morris/morris.js') }}"></script>
         
         
         <script src="{{ url_for('static', filename='js/easypiechart.js') }}"></script>
@@ -63,7 +57,14 @@
          <script src="{{ url_for('static', filename='js/Lightweight-Chart/jquery.chart.js') }}"></script>
         
         <!-- Custom Js -->
-        <script src="{{ url_for('static', filename='js/custom-scripts.js') }}"></script> 
+        <script src="{{ url_for('static', filename='js/custom.js') }}"></script> 
+
+        <div id="main-div" class="with-margins">
+        {% block content %}{% endblock %}
+        </div>
+
+        <br/>
+        {% block body %}
         {% endblock %}
     </body>
 </html>
