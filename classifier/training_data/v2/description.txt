@@ -1,0 +1,1 @@
+Second data set removes the trash folder, as it most likely is confusing the network.
