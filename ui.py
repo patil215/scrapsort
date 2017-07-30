@@ -5,9 +5,15 @@ def display_message(message):
     rainbowhat.display.print_str(message)
     rainbowhat.display.show()
 
-def display_long_message(message, delay=0.25):
-	for i in range(len(message) / 4):
-		display_message(message[i : min(i + 4, len(message))])
+
+def display_long_message(message, n = 1, delay=.25):
+	for i in range(n):
+		for j in range(len(message)):
+			time.sleep(delay)
+			display_message(message[j : min(j + 4, len(message))])
+		display_message("    ") # clear the display
+		if i < (n - 1):
+			time.sleep(1) # sleep after each loop except the last 
 
 def set_all_pixels(*args, **kwargs):
 	for pixel in range(7):
