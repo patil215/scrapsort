@@ -1,4 +1,3 @@
-import os
 import numpy as np
 import tensorflow as tf
 
@@ -42,9 +41,5 @@ class Classifier:
         for node_id in top_k:
             human_string = labels[node_id]
             score = predictions[node_id]
-            answers.append({"type": human_string, "score" : score })
+            answers.append({"type": human_string, "score" : score.item() })
         return answers
-
-classifier = Classifier(os.path.abspath('classifier/trained_graph.pb'), os.path.abspath('classifier/output_labels.txt'))
-print classifier.get_image_labels('img/classificationImage.jpg')
-print classifier.get_image_labels('img/bottles/bottle0.jpg')

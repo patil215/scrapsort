@@ -7,6 +7,7 @@ status = "ready"
 
 # each color is a tuple (r, g, b)
 status_colors = {
+	"initializing" : (1, 1, 0),
 	"ready": (0, 1, 0),
 	"classifying": (0, 0, 1),
 	"recycling": (0, 1, 1),

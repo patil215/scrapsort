@@ -1,19 +1,21 @@
 import servo
 import ui
 from camera import Camera
-import vision
+from vision import Classifier
 import motiondetector
 import time 
 import brain
 from databasehelper import Database
+import os
 
 TRASH_POS = 10
-RECYCLE_POS = 180
+RECYCLE_POS = 160
 NEUTRAL_POS = 100
 
 def sort_trash(imgpath):
 	camera = Camera()
 	database = Database()
+	classifier = Classifier(os.path.abspath('classifier/trained_graph.pb'), os.path.abspath('classifier/output_labels.txt'))
 
 	statusThread = ui.start_status_shower_thread()
 
@@ -33,7 +35,8 @@ def sort_trash(imgpath):
 
 		# take a photo and classify it
 		camera.takePhoto(imgpath)
-		labels = vision.get_image_labels(imgpath)
+		labels = classifier.get_image_labels(imgpath)
+		print labels
 		selectedLabel = brain.getRecyclingLabel(labels)
 		is_trash = selectedLabel == None
 
