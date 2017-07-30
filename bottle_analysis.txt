@@ -1,0 +1,100 @@
+Label: tap
+Count: 1
+Average Score: 0.608321
+
+Label: mason jar
+Count: 1
+Average Score: 0.515727
+
+Label: circle
+Count: 1
+Average Score: 0.562612
+
+Label: material
+Count: 1
+Average Score: 0.775108
+
+Label: plaster
+Count: 1
+Average Score: 0.504933
+
+Label: lighting
+Count: 1
+Average Score: 0.713617
+
+Label: flavor
+Count: 2
+Average Score: 0.549282
+
+Label: soft drink
+Count: 2
+Average Score: 0.588717
+
+Label: ice
+Count: 3
+Average Score: 0.558970
+
+Label: green
+Count: 3
+Average Score: 0.945371
+
+Label: drink
+Count: 4
+Average Score: 0.675500
+
+Label: mineral water
+Count: 8
+Average Score: 0.634790
+
+Label: cylinder
+Count: 9
+Average Score: 0.541098
+
+Label: product design
+Count: 10
+Average Score: 0.616452
+
+Label: blue
+Count: 11
+Average Score: 0.968292
+
+Label: liquid
+Count: 11
+Average Score: 0.544579
+
+Label: bottled water
+Count: 12
+Average Score: 0.664005
+
+Label: plastic
+Count: 21
+Average Score: 0.658767
+
+Label: plastic bottle
+Count: 27
+Average Score: 0.693684
+
+Label: glass
+Count: 27
+Average Score: 0.647215
+
+Label: glass bottle
+Count: 29
+Average Score: 0.672570
+
+Label: water
+Count: 30
+Average Score: 0.814629
+
+Label: drinkware
+Count: 30
+Average Score: 0.651733
+
+Label: bottle
+Count: 36
+Average Score: 0.780231
+
+Label: product
+Count: 45
+Average Score: 0.712672
+
