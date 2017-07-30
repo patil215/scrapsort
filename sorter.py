@@ -34,9 +34,10 @@ def sort_trash(imgpath):
 		# take a photo and classify it
 		camera.takePhoto(imgpath)
 		labels = vision.get_image_labels(imgpath)
-		is_trash = brain.isTrash(labels)
+		selectedLabel = brain.getRecyclingLabel(labels)
+		is_trash = selectedLabel == None
 
-		database.write_result(imgpath, labels, is_trash)
+		database.write_result(imgpath, labels, is_trash, selectedLabel)
 		print "Wrote result to database."
 
 		if is_trash:

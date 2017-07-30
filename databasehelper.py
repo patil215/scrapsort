@@ -9,9 +9,9 @@ class Database:
 	def __init__(self):
 		self.firebase = firebase.FirebaseApplication("https://smart-garbage-4ba99.firebaseio.com/", None)
 
-	def write_result(self, imageFilePath, labels, isTrash):
+	def write_result(self, imageFilePath, labels, isTrash, pickedRecyclingLabel):
 		timestamp = int(time.time()) # Seconds since UNIX epoch
 		image = open(imageFilePath, "rb")
 		imagebase64 = base64.b64encode(image.read())
-		data = {'image': imagebase64, 'labels': labels, 'isTrash' : isTrash, 'timestamp': timestamp, 'version': version}
+		data = {'image': imagebase64, 'labels': labels, 'isTrash' : isTrash, 'timestamp': timestamp, 'recyclingLabel': pickedRecyclingLabel, 'version': version}
 		self.firebase.post('/trashLogs', data)
