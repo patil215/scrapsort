@@ -2,7 +2,7 @@ import rainbowhat
 import time
 import threading
 
-status_lock = threading.Condition()
+status_lock = threading.Lock()
 status = "ready"
 
 # each color is a tuple (r, g, b)
@@ -33,12 +33,12 @@ def set_all_pixels(*args, **kwargs):
 	rainbowhat.rainbow.show()
 
 
-def show_status(status):
-	if status == "ready":
-		set_all_pixels(0, 1, 0, brightness=1)
-	else:
-		set_all_pixels(1, 0, 0, brightness=1)
-	display_long_message(status)
+# def show_status(status):
+# 	if status == "ready":
+# 		set_all_pixels(0, 1, 0, brightness=1)
+# 	else:
+# 		set_all_pixels(1, 0, 0, brightness=1)
+# 	display_long_message(status)
 
 # def show_decision(is_trash):
 # 	if is_trash:
@@ -56,15 +56,19 @@ class StatusShower(threading.Thread):
 			status_lock.acquire()
 			s = status
 			status_lock.release()
-
+			
 			color = status_colors[s]
 			set_all_pixels(*color, brightness=1)
-			display_long_message(s)
+			display_long_message(s.upper())
 
 			time.sleep(1)
 
 def start_status_shower_thread():
-	return StatusShower()
+	thread = StatusShower()
+	thread.daemon = True
+	thread.start()
+	return thread
+
 
 def set_status(s):
 	global status 
@@ -89,8 +93,6 @@ def press_c(channel):
 
 
 if __name__ == '__main__':
-	show_decision(False)
-
 	try:
 		while True:
 			pass
