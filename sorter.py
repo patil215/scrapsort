@@ -5,13 +5,15 @@ import vision
 import motiondetector
 import time 
 import brain
+from databasehelper import Database
 
 TRASH_POS = 10
 RECYCLE_POS = 180
 NEUTRAL_POS = 100
 
 def sort_trash(imgpath):
-	camera = Camera()	
+	camera = Camera()
+	database = Database()
 
 	statusThread = ui.start_status_shower_thread()
 
@@ -33,6 +35,9 @@ def sort_trash(imgpath):
 		camera.takePhoto(imgpath)
 		labels = vision.get_image_labels(imgpath)
 		is_trash = brain.isTrash(labels)
+
+		database.write_result(imgpath, labels, is_trash)
+		print "Wrote result to database."
 
 		if is_trash:
 			print("It's trash.")
