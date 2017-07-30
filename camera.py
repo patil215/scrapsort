@@ -4,4 +4,3 @@ import picamera
 def takePhoto(filepath):
 	camera = picamera.PiCamera()
 	camera.capture(filepath)
-
