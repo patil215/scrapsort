@@ -22,7 +22,8 @@ def home_page():
 
     items = []
     for value in list(values.keys()):
-        items.append(values[value])
+        if str(values[value]["version"]) == "0.2":
+            items.append(values[value])
 
     numTrash = 0
     for item in items:
@@ -33,6 +34,18 @@ def home_page():
 
     numItems = len(items)
 
-    data = {'numItems': numItems, 'numTrash' : numTrash, 'numRecycle' : numRecycle}
+    percentages = {}
+    # Assign percentages to each item
+    for item in items:
+        if 'recyclingLabel' in item and item['recyclingLabel'] != None:
+            if item['recyclingLabel'] in percentages:
+                percentages[item['recyclingLabel']] += 1
+            else:
+                percentages[item['recyclingLabel']] = 1
 
-    return render('pages/home_page.html', data=data)
+    for label in percentages.keys():
+        percentages[label] = float(percentages[label]) / numRecycle
+
+    data = {'numItems': numItems, 'numTrash' : numTrash, 'numRecycle' : numRecycle, 'percentages' : percentages}
+
+    return render_template('pages/home_page.html', data=data)
