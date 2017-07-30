@@ -64,7 +64,7 @@ class StatusShower(threading.Thread):
 			time.sleep(1)
 
 def start_status_shower_thread():
-	StatusShower()
+	return StatusShower()
 
 def set_status(s):
 	global status 
