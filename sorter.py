@@ -1,25 +1,31 @@
 import servo
 import ui
-import camera
+from camera import Camera
 import vision
 import motiondetector
 import time 
+import brain
 
-TRASH_POS = 40
-RECYCLE_POS = 200
-NEUTRAL_POS = 105
+TRASH_POS = 10
+RECYCLE_POS = 180
+NEUTRAL_POS = 100
 
 def sort_trash(imgpath):
+	camera = Camera()	
+
 	statusThread = ui.start_status_shower_thread()
 
 	while True:
 		servo.move(NEUTRAL_POS)
-		set_status("ready")
+		ui.set_status("ready")
 
 		# wait for camera to detect motion, then sleep for a bit to
 		# let the object settle down
-		motiondetector.waitForMotionDetection()
-		time.sleep(1) # Lets object settle down, TODO maybe remove
+		print "waiting for motion..."
+		motiondetector.waitForMotionDetection(camera.getPiCamera())
+		time.sleep(0.5) # Lets object settle down, TODO maybe remove
+		
+		print "detected motion"
 
 		ui.set_status("classifying")
 
