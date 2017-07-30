@@ -43,7 +43,6 @@ def sort_trash(imgpath):
 			ui.set_status("recycling")
 			servo.move(RECYCLE_POS)
 
-	statusThread.shutdown()
 
 def main():
 	sort_trash('img/classificationImage.jpg')
