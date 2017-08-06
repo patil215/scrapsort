@@ -4,6 +4,8 @@ Recycling can be a pain. Whether through ignorance or indifference, people often
 
 I built a classifier that uses computer vision to determine if a piece of trash is recyclable or not. This classifier then powers a hardware device I built that swings around to dump the trash in the right spot.
 
+__
+
 ## Trash Classification Algorithm
 
 Initially, when prototyping the classifier, I used the Google Cloud Vision API, which allows you to upload and image and receive a list of labels (with confidence values) of the content of that image. The algorithm could then see if any of these labels matched common recyclable materials like "paper", "cardboard", and so on.
