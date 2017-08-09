@@ -4,6 +4,7 @@ Recycling can be a pain. Whether through ignorance or indifference, people often
 
 I built a classifier that uses computer vision to determine if a piece of trash is recyclable or not. This classifier then powers a hardware device I built that swings around to dump the trash in the right spot.
 
+__
 
 ## Trash Classification Algorithm
 
@@ -27,6 +28,9 @@ I used the tensorflow library to train the model.
 
 Special thanks to [this paper](http://cs229.stanford.edu/proj2016/report/ThungYang-ClassificationOfTrashForRecyclabilityStatus-report.pdf), which provided some of the dataset and advice on the model I used.
 
+
+
+
 ## The Device
 
 The device consists of a Raspberry Pi 3 connected to a camera module. This camera points down towards a tray which has servo motors at the pivots. Trash is placed on this tray, which triggers motion detection on the camera. Depending on what the camera sees, the Pi can use the servo motors to orient the tray and have the trash slide into the right bin. The Raspberry Pi uses Python for all hardware interfacing and classification logic.
@@ -41,6 +45,9 @@ A few pictures:
 
 ![alt text](readmePhotos/device_3.jpg)
 
+
+
+
 ## Dashboard
 
 When the device sorts a piece of trash, it sends a copy of the picture and information about what it classified that trash as to a Firebase database. I built a dashboard that pulls data from this database and allows you to view a few interesting statistics about your trash. I might extend this in the future to make the device more of a "smart" trash can.
@@ -48,6 +55,8 @@ When the device sorts a piece of trash, it sends a copy of the picture and infor
 A screenshot:
 
 ![alt text](readmePhotos/dashboard_1.png)
+
+
 
 
 ## Future Plans
