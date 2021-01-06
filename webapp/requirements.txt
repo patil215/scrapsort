@@ -13,7 +13,7 @@ numpy==1.12.0
 oauth2client==4.0.0
 olefile==0.44
 packaging==16.8
-Pillow==4.0.0
+Pillow==8.1.0
 protobuf==3.2.0
 pyasn1==0.2.2
 pyasn1-modules==0.0.8
