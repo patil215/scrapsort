@@ -24,7 +24,7 @@ requests==2.13.0
 rsa==3.4.2
 six==1.10.0
 uritemplate==3.0.0
-Flask==0.12
+Flask==0.12.3
 Flask-Migrate==2.0.2
 Flask-Script==2.0.5
 Flask-WTF==0.13.1
