@@ -36,3 +36,4 @@ redis
 google-cloud-storage==0.22.0
 pycaption==1.0.0
 pyrebase
+pycryptodome>=3.4.4 # not directly required, pinned by Snyk to avoid a vulnerability
